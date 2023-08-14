@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".SignupActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+
+            android:drawableLeft="@drawable/baseline_email_24"
+            android:inputType="textEmailAddress"
+            android:id="@+id/main_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            style="@style/edit_stylelaypout"/>
+
+        <EditText
+            android:id="@+id/main_contect"
+            android:hint="contect"
+            android:inputType="numberPassword"
+            android:drawableLeft="@drawable/baseline_vpn_key_24"
+            android:layout_below="@+id/main_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/edit_stylelaypout"
+            />
+
+
+
+
+        <EditText
+            android:layout_below="@id/main_contect"
+            android:drawableLeft="@drawable/baseline_email_24"
+            android:inputType="textEmailAddress"
+            android:id="@+id/main_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email_id"
+            style="@style/edit_stylelaypout"/>
+
+        <EditText
+            android:id="@+id/main_password"
+            android:hint="password"
+            android:inputType="numberPassword"
+            android:drawableLeft="@drawable/baseline_vpn_key_24"
+            android:layout_below="@+id/main_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/edit_stylelaypout"
+            />
+        <EditText
+            android:id="@+id/main_conformpassword"
+            android:hint="Confom password"
+            android:inputType="numberPassword"
+            android:drawableLeft="@drawable/baseline_vpn_key_24"
+            android:layout_below="@+id/main_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/edit_stylelaypout"
+            />
+
+        <CheckBox
+            android:text="Remember me"
+            android:textSize="@dimen/_18sdp"
+            android:id="@+id/main_remember"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_conformpassword"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp" />
+
+        <Button
+            android:textColor="#F08FAA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@id/main_remember"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Log in"
+            android:textSize="@dimen/_18sdp"
+            android:id="@+id/login"
+            app:backgroundTint="@null"
+            android:background="@drawable/button_white"
+            android:textColorHint="@color/pink"/>
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login"
+            android:layout_marginHorizontal="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:backgroundTint="@color/white"
+            android:text="Sign Up"
+            android:textSize="@dimen/_20sdp"
+            android:textColor="#F08FAA"
+            android:textColorHint="@color/pink"
+            android:textStyle="bold"
+            android:id="@+id/signup"/>
+        <TextView
+            android:fontFamily="cursive"
+            android:textSize="@dimen/_18sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/signup"
+            android:text="Forget Password"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_margin="@dimen/_20sdp"
+
+
+            />
+    </RelativeLayout>
+
+</ScrollView>
