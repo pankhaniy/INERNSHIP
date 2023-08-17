@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <EditText
-
+            android:layout_marginHorizontal="@dimen/_18sdp"
             android:drawableLeft="@drawable/baseline_email_24"
             android:inputType="textEmailAddress"
             android:id="@+id/main_name"
@@ -20,6 +20,7 @@
             style="@style/edit_stylelaypout"/>
 
         <EditText
+            android:layout_marginHorizontal="@dimen/_18sdp"
             android:id="@+id/main_contect"
             android:hint="contect"
             android:inputType="numberPassword"
@@ -31,9 +32,8 @@
             />
 
 
-
-
         <EditText
+            android:layout_marginHorizontal="@dimen/_18sdp"
             android:layout_below="@id/main_contect"
             android:drawableLeft="@drawable/baseline_email_24"
             android:inputType="textEmailAddress"
@@ -44,6 +44,7 @@
             style="@style/edit_stylelaypout"/>
 
         <EditText
+            android:layout_marginHorizontal="@dimen/_18sdp"
             android:id="@+id/main_password"
             android:hint="password"
             android:inputType="numberPassword"
@@ -54,6 +55,7 @@
             style="@style/edit_stylelaypout"
             />
         <EditText
+            android:layout_marginHorizontal="@dimen/_18sdp"
             android:id="@+id/main_conformpassword"
             android:hint="Confom password"
             android:inputType="numberPassword"
@@ -63,40 +65,65 @@
             android:layout_height="wrap_content"
             style="@style/edit_stylelaypout"
             />
-
-        <CheckBox
-            android:text="Remember me"
-            android:textSize="@dimen/_18sdp"
-            android:id="@+id/main_remember"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RadioGroup
+            android:orientation="horizontal"
             android:layout_below="@id/main_conformpassword"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp" />
-
-        <Button
-            android:textColor="#F08FAA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_below="@id/main_remember"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Log in"
-            android:textSize="@dimen/_18sdp"
-            android:id="@+id/login"
-            app:backgroundTint="@null"
-            android:background="@drawable/button_white"
-            android:textColorHint="@color/pink"/>
+            android:id="@+id/button"
+            android:layout_marginHorizontal="@dimen/_18sdp">
+
+            <RadioButton
+                android:layout_weight="1"
+                style="@style/radio_16"
+                android:text="Male"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/male"
+            />
+
+            <RadioButton
+                android:layout_weight="1"
+                style="@style/radio_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:id="@+id/female"
+                android:layout_below="@id/male"/>
+        </RadioGroup>
+
+        <Spinner
+            android:popupBackground="@color/black"
+            android:background="@color/material_dynamic_primary90"
+            android:layout_marginHorizontal="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signup_city"
+            android:scrollbarSize="@dimen/_20sdp"
+            android:layout_below="@id/button"/>
+
+        <EditText
+
+            android:editable="false"
+            android:layout_marginHorizontal="@dimen/_18sdp"
+            android:layout_below="@id/signup_city"
+            android:drawableLeft="@drawable/baseline_email_24"
+            android:inputType="textEmailAddress"
+            android:id="@+id/signup_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date of Birth"
+            style="@style/edit_stylelaypout"/>
+
+
 
         <Button
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/login"
+            android:layout_below="@id/signup_dob"
             android:layout_marginHorizontal="@dimen/_18sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:backgroundTint="@color/white"
