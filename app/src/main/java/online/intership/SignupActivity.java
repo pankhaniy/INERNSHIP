@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +37,7 @@ public class SignupActivity extends AppCompatActivity {
 
    // RadioButton male,female;
     RadioGroup gender;
+    String sgender;
 
     Spinner city;
     //String[] cityArray = {"Ahmedabad","Vadodara","Surat","Rajkot","Gandhinager","kadi","kalol",};
@@ -43,10 +45,16 @@ public class SignupActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     Calendar calendar;
 
+    SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        db=openOrCreateDatabase("Internship",MODE_PRIVATE,null);
+        String tableQuery="CREATE TABLE IF NOT EXISTS USER(USERID INTEGER PRIMARY KEY AUTOINCREMENT,NAME VARCHAR(100),CONTECT INT(10),EMAIL VARCHAR(100),PASSWORD VARCHAR(10),GENDER VARCHAR(6),CITY VARCHAR(50),DOB VARCHAR(10))";
+        db.execSQL(tableQuery);
 
         name = findViewById(R.id.main_name);
         email = findViewById(R.id.main_email);
@@ -131,7 +139,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton=findViewById(i);
-                new CommanMethod(SignupActivity.this,radioButton.getText().toString());
+                sgender = radioButton.getText().toString();
+                new CommanMethod(SignupActivity.this,sgender);
             }
         });
 
@@ -186,6 +195,10 @@ public class SignupActivity extends AppCompatActivity {
                     confirmPassword.setError("Password Does Not Match");
                 }
                 else {
+
+                    String insertQuery= "INSERT INTO USER VALUE(NULL,'"+name.getText().toString()+"','"+contact.getText().toString()+"','"+email.getText().toString()+"','"+password.getText().toString()+"','"+sgender+"','"+city+"','"+dob.getText().toString()+"')";
+                    db.execSQL(insertQuery);
+
                     System.out.println("Signup Successfully");
                     new CommanMethod(SignupActivity.this, "Login Successfully");
                     //Toast.makeText(SignupActivity.this,"Signup Successfully",Toast.LENGTH_SHORT).show();
