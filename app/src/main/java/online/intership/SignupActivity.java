@@ -1,11 +1,14 @@
 package online.intership;
 
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -37,6 +40,8 @@ public class SignupActivity extends AppCompatActivity {
 
    // RadioButton male,female;
     RadioGroup gender;
+
+    String scity="";
     String sgender;
 
     Spinner city;
@@ -123,8 +128,13 @@ public class SignupActivity extends AppCompatActivity {
         city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                new CommanMethod(SignupActivity.this,arrayList.get(i));
-
+                if (i==0){
+                    scity="";
+                }
+                else {
+                    scity=arrayList.get(i);
+                    new CommanMethod(SignupActivity.this,scity);
+                }
             }
 
             @Override
@@ -168,45 +178,60 @@ public class SignupActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(name.getText().toString().trim().equals("")){
+                if (name.getText().toString().trim().equals("")) {
                     name.setError("Name Required");
-                }
-                else if (email.getText().toString().trim().equals("")) {
+                } else if (email.getText().toString().trim().equals("")) {
                     email.setError("Email Id Required");
                 } else if (!email.getText().toString().trim().matches(emailPattern)) {
                     email.setError("Valid Email Id Required");
-                }
-                else if(contact.getText().toString().trim().equals("")){
+                } else if (contact.getText().toString().trim().equals("")) {
                     contact.setError("Contact No. Required");
-                }
-                else if(contact.getText().toString().trim().length()<10){
+                } else if (contact.getText().toString().trim().length() < 10) {
                     contact.setError("Valid Contact No. Required");
-                }
-                else if (password.getText().toString().trim().equals("")) {
+                } else if (password.getText().toString().trim().equals("")) {
                     password.setError("Password Required");
                 } else if (password.getText().toString().trim().length() < 6) {
                     password.setError("Min. 6 Char Password Required");
-                }else if (confirmPassword.getText().toString().trim().equals("")) {
+                } else if (confirmPassword.getText().toString().trim().equals("")) {
                     confirmPassword.setError("Confirm Password Required");
                 } else if (confirmPassword.getText().toString().trim().length() < 6) {
                     confirmPassword.setError("Min. 6 Char Confirm Password Required");
-                }
-                else if(!confirmPassword.getText().toString().trim().matches(password.getText().toString().trim())){
+                } else if (!confirmPassword.getText().toString().trim().matches(password.getText().toString().trim())) {
                     confirmPassword.setError("Password Does Not Match");
+                } else if (gender.getCheckedRadioButtonId() == -1) {
+                    new CommanMethod(SignupActivity.this, "Please select Gender");
+                } else if (scity.equals("")) {
+                    new CommanMethod(SignupActivity.this, "please select city");
+                } else if (dob.getText().toString().trim().equals("")) {
+                    dob.setError("Please select date of birth");
+
                 }
-                else {
-
-                    String insertQuery= "INSERT INTO USER VALUE(NULL,'"+name.getText().toString()+"','"+contact.getText().toString()+"','"+email.getText().toString()+"','"+password.getText().toString()+"','"+sgender+"','"+city+"','"+dob.getText().toString()+"')";
-                    db.execSQL(insertQuery);
-
+               /* else {
                     System.out.println("Signup Successfully");
-                    new CommanMethod(SignupActivity.this, "Login Successfully");
+                    new CommanMethod(SignupActivity.this, "Signup Successfully");
                     //Toast.makeText(SignupActivity.this,"Signup Successfully",Toast.LENGTH_SHORT).show();
-                    new CommanMethod(view,"Signup Successfully");
+                    new CommanMethod(view, "Signup Successfully");
                     //Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
-                    new CommanMethod(SignupActivity.this, HomeActivity.class);
-                    //Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
-                    //startActivity(intent);
+                    //new CommanMethod(SignupActivity.this, HomeActivity.class);
+                    //intent intent = new Intent(SignupActivity.this, HomeActivity.class);
+                    //startActivity(intent);*/
+                else {
+                        String selectQuery = "SELECT * FROM USER WHERE EMAIL='"+email.getText().toString()+"'OR CONTECT='"+contact.getText().toString()+"'";
+                        Cursor cursor=db.rawQuery(selectQuery,null);
+                        if(cursor.getCount()>0){
+                            new CommanMethod(SignupActivity.this,"Email id/Contect no. Already Registered");
+
+                            }
+                            else {
+                            String insertQuery = "INSERT INTO USER VALUE(NULL,'" + name.getText().toString() + "','" + contact.getText().toString() + "','" + email.getText().toString() + "','" + password.getText().toString() + "','" + sgender + "','" + scity + "','" + dob.getText().toString() + "')";
+                            db.execSQL(insertQuery);
+
+                            System.out.println("Signup Successfully");
+                            new CommanMethod(SignupActivity.this,"Signup Successfully");
+                        onBackPressed();
+                            onBackPressed();
+                    }
+
                 }
             }
         });
